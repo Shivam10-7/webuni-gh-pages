@@ -1,5 +1,5 @@
 from flask import Flask,render_template
-
+#error while importing render_template form flask module (error mentions no module named flask found )
 app = Flask(__name__)
 
 @app.route("/")
