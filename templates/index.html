@@ -13,10 +13,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="css/font-awesome.min.css"/>
-	<link rel="stylesheet" href="css/owl.carousel.css"/>
-	<link rel="stylesheet" href="css/style.css"/>
+	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/> -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
 
 
 	<!--[if lt IE 9]>
@@ -62,7 +63,7 @@
 
 
 	<!-- Hero section -->
-	<section class="hero-section set-bg" data-setbg="img/bg.jpg">
+	<section class="hero-section set-bg" data-setbg="{{ url_for('static', filename='img/bg.jpg') }}">
 		<div class="container">
 			<div class="hero-text text-white">
 				<h2>Get The Best Free Online Courses</h2>
@@ -474,10 +475,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 	<!--====== Javascripts & Jquery ======-->
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/mixitup.min.js"></script>
-	<script src="js/circle-progress.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }} "></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }} "></script>
+	<script src="https://cdn.jsdelivr.net/npm/mixitup/dist/mixitup.min.js"></script> 
+	<script src="{{ url_for('static', filename='js/circle-progress.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </html>
