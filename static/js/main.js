@@ -122,3 +122,10 @@ $(window).on('load', function() {
 
 })(jQuery);
 
+
+function checkadd(){
+	if(name=="admin" && password=="1234") {
+		
+	}
+}
+

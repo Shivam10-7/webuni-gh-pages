@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTech User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/usercss.css') }}">
+
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h1>EduTech User</h1>
+            <nav>
+                <ul id="sidebarMenu">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Files</a></li>
+                    <li><a href="#">Quizzes</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Stats Section -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Files</h3>
+                    <p id="totalFiles">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Quizzes</h3>
+                    <p id="totalQuizzes">0</p>
+                </div>
+            </div>
+
+            <!-- Files Section -->
+            <div class="file-section">
+                <h2>Available Files</h2>
+                <div class="file-controls">
+                    <input type="text" class="search-bar" placeholder="Search files..." onkeyup="searchFiles()">
+                </div>
+                <div class="file-grid" id="availableFiles"></div>
+            </div>
+
+            <!-- Quiz Section -->
+            <div class="file-section">
+                <h2>Available Quizzes</h2>
+                <div class="file-controls">
+                    <input type="text" class="search-bar" placeholder="Search quizzes..." onkeyup="searchQuizzes()">
+                </div>
+                <div class="file-grid" id="availableQuizzes"></div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+ 
+
+<script src="{{ url_for('static', filename='js/ujs.js') }}"></script>
+</html>
