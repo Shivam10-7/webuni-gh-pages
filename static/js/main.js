@@ -124,8 +124,14 @@ $(window).on('load', function() {
 
 
 function checkadd(){
-	if(name=="admin" && password=="1234") {
-		
-	}
+	const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Example validation (replace with actual validation logic)
+    if (username === 'admin' && password === '123') {
+        window.location.href = '/admin'; // Redirect to admin page
+    } else {
+        alert('Invalid username or password');
+    }
 }
 

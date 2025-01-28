@@ -32,20 +32,24 @@
 		<div class="loader"></div>
 	</div>
 
+	<script>
+		(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="am5Hvk9lOSL7nsc1zC3Mk";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+		</script>
+
 	<!-- Header section -->
 	<header class="header-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 col-md-3">
 					<div class="site-logo">
-						<img src="img/logo.png" alt="There must be an image here ">
+						<img src="{{ url_for('static', filename='img/logo.png') }}" alt="There must be an image here ">
 					</div>
 					<div class="nav-switch">
 						<i class="fa fa-bars"></i>
 					</div>
 				</div>
 				<div class="col-lg-9 col-md-9">
-					<a href="" class="site-btn header-btn">Login</a>
+					<a href="/user" class="site-btn header-btn">Login</a>
 					<nav class="main-menu">
 						<ul>
 							<li><a href="">Home</a></li>
@@ -53,8 +57,7 @@
 							<li><a href="/courses">Courses</a></li>
 							<li><a href="/blog">News</a></li>
 							<li><a href="/contact">Contact</a></li>
-							<li><a href="/user">User</a></li>
-							<li><a href="/admin">Admin</a></li>
+							<li><a href="/addlog">Admin</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -371,18 +374,21 @@
 				<div class="col-lg-6">
 					<div class="signup-warp">
 						<div class="section-title text-white text-left">
-							<h2>Sign up to became a teacher</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+							<h2>Admin Login</h2>
+							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p> -->
 						</div>
 						<!-- signup form -->
-						<form class="signup-form">
-							<input type="text" placeholder="Your User Name" id="name">
-							<input type="password" placeholder="Password" id="pass">
-							<!-- <input type="text" placeholder="Your Phone"> -->
-							<!-- <label for="v-upload" class="file-up-btn">Upload Course</label>
-							<input type="file" id="v-upload"> -->
-							<button class="site-btn" onclick()="checkadd()"></a>>Search Couse</button>
-						</form>
+						<section id="admin-login-section">
+							
+							<!-- <form onsubmit="checkadd(); return false;">
+								<input type="text" id="username" placeholder="Username" required>
+								<input type="password" id="password" placeholder="Password" required>
+								<button type="submit">Login</button>
+							</form> -->
+						</section>
+
+
+
 					</div>
 				</div>
 			</div>
@@ -483,4 +489,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="{{ url_for('static', filename='js/circle-progress.min.js') }}"></script>
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
 </html>
