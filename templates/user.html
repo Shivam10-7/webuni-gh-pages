@@ -230,6 +230,114 @@
             to { transform: translateX(0); }
         }
 
+        .text-to-speech-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #E0E0E0;
+        }
+        
+        .text-to-speech-section:hover {
+            box-shadow: 0 5px 15px rgba(227, 24, 55, 0.1);
+        }
+        
+        .text-to-speech-section h2 {
+            color: #E31837;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+        
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #E0E0E0;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background-color: #F8F8F8;
+        }
+        
+        .form-group input[type="file"]:hover {
+            border-color: #E31837;
+        }
+        
+        .form-group input[type="file"]:focus {
+            outline: none;
+            border-color: #E31837;
+            box-shadow: 0 0 5px rgba(227, 24, 55, 0.2);
+        }
+        
+        .btn {
+            background-color: #E31837;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background-color: #C4162F;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(227, 24, 55, 0.2);
+        }
+        
+        .audio-player {
+            margin-top: 20px;
+            width: 100%;
+            display: none;
+            border-radius: 5px;
+            background-color: #F8F8F8;
+        }
+        
+        .audio-player.visible {
+            display: block;
+        }
+        
+        /* Style for the audio controls */
+        .audio-player::-webkit-media-controls-panel {
+            background-color: #F8F8F8;
+            border-radius: 5px;
+        }
+        
+        .audio-player::-webkit-media-controls-play-button {
+            background-color: #E31837;
+            border-radius: 50%;
+            color: white;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .text-to-speech-section {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .menu-icon {
@@ -260,6 +368,172 @@
                 flex-direction: column;
             }
         }
+
+
+        .sidebar {
+            width: 250px;
+            background-color: #E31837;
+            color: white;
+            padding: 20px;
+            position: fixed;  /* Changed to fixed */
+            height: 100vh;    /* Full viewport height */
+            left: 0;
+            top: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .main-content {
+            margin-left: 250px; /* Match sidebar width */
+            flex: 1;
+            padding: 20px;
+            background-color: #F8F8F8;
+            transition: all 0.3s ease;
+            min-height: 100vh;  /* Full viewport height */
+        }
+        
+        /* Text to Speech Toggle Arrow */
+        .tts-toggle {
+            position: fixed;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #E31837;
+            color: white;
+            padding: 15px;
+            border-radius: 10px 0 0 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tts-toggle:hover {
+            right: 0;
+        }
+        
+        .tts-toggle::before {
+            content: '🎤';
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        
+        .tts-toggle::after {
+            content: 'Text to Speech';
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .tts-toggle:hover::after {
+            opacity: 1;
+        }
+        
+        /* Text to Speech Section Styling */
+        .text-to-speech-section {
+            position: fixed;
+            right: -500px;  /* Start off-screen */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px 0 0 10px;
+            box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 98;
+        }
+        
+        .text-to-speech-section.active {
+            right: 0;
+        }
+        
+        /* Animation for file upload */
+        @keyframes uploadPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .form-group input[type="file"]:focus + label {
+            animation: uploadPulse 1s infinite;
+        }
+        
+        /* Success animation for conversion */
+        @keyframes successCheck {
+            0% { transform: scale(0); }
+            70% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .conversion-success {
+            display: none;
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .conversion-success.show {
+            display: block;
+            animation: successCheck 0.5s ease-out;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                left: -250px;
+            }
+        
+            .sidebar.active {
+                left: 0;
+            }
+        
+            .main-content {
+                margin-left: 0;
+            }
+        
+            .text-to-speech-section {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+
+        /* Add new styles for the nav item */
+#sidebarMenu .podcast-link {
+    position: relative;
+    overflow: hidden;
+}
+
+#sidebarMenu .podcast-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#sidebarMenu .podcast-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+#sidebarMenu .podcast-link:hover::after {
+    transform: translateX(0);
+}
+
+/* Active state for podcast link */
+#sidebarMenu .podcast-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#sidebarMenu .podcast-link.active::after {
+    transform: translateX(0);
     </style>
 </head>
 <body>
@@ -278,6 +552,16 @@
         </div>
     </div>
 
+
+    <div class="tts-toggle" id="ttsToggle"></div>
+
+<!-- Modified navigation item in sidebar -->
+<ul id="sidebarMenu">
+    <!-- ... other menu items ... -->
+    <li><a href="#" onclick="showTTSSection()">🎤 Text to Podcast</a></li>
+</ul>
+
+
     <div class="dashboard">
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
@@ -288,7 +572,7 @@
                     <li><a href="#" onclick="showSection('files')">📁 Files</a></li>
                     <li><a href="#" onclick="showSection('quizzes')">📝 Quizzes</a></li>
                     <li><a href="#" onclick="showSection('settings')">⚙️ Settings</a></li>
-                    <li><a href="#"></a> Text to Prodcast</li>
+                    <li><a href="#" class="podcast-link" onclick="showTTSSection(event)">🎙️ Text to Podcast</a></li>
                 </ul>
             </nav>
         </div>
@@ -327,6 +611,8 @@
         </div>
     </div>
     
+    
+    
     <div class="text-to-speech-section">
         <h2>Text to Speech Converter</h2>
         <form id="uploadForm" action="/convert" method="post" enctype="multipart/form-data">
@@ -336,9 +622,9 @@
             </div>
             <button type="submit" class="btn">Convert to Audio</button>
         </form>
-        <audio id="audioPlayer" controls style="display:none;"></audio>
+        <audio id="a
+        udioPlayer" class="audio-player" controls></audio>
     </div>
-
     
 
 
@@ -463,6 +749,125 @@
             const filteredQuizzes = quizzes.filter(quiz => quiz.name.toLowerCase().includes(searchTerm));
             displayQuizzes(filteredQuizzes);
         }
+
+        function showTTSSection() {
+            const ttsSection = document.querySelector('.text-to-speech-section');
+            ttsSection.classList.add('active');
+            
+            // Smooth scroll to TTS section on mobile
+            if (window.innerWidth <= 768) {
+                ttsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Toggle TTS Section with arrow
+        document.getElementById('ttsToggle').addEventListener('click', function() {
+            const ttsSection = document.querySelector('.text-to-speech-section');
+            ttsSection.classList.toggle('active');
+        });
+        
+        // Handle file upload and conversion
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length > 0) {
+                // Show loading state
+                const btn = document.querySelector('.btn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Converting...';
+                btn.disabled = true;
+                
+                // Simulate conversion process
+                setTimeout(() => {
+                    // Show success message
+                    const success = document.createElement('div');
+                    success.className = 'conversion-success show';
+                    success.textContent = '✓ Conversion Complete!';
+                    document.getElementById('uploadForm').appendChild(success);
+                    
+                    // Show audio player
+                    const audioPlayer = document.getElementById('audioPlayer');
+                    audioPlayer.classList.add('visible');
+                    
+                    // Reset button
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    
+                    // Show toast
+                    showToast('Audio conversion completed successfully!');
+                }, 2000);
+            }
+        });
+        
+        // Close TTS section when clicking outside
+        document.addEventListener('click', function(e) {
+            const ttsSection = document.querySelector('.text-to-speech-section');
+            const ttsToggle = document.getElementById('ttsToggle');
+            
+            if (!ttsSection.contains(e.target) && 
+                !ttsToggle.contains(e.target) && 
+                !e.target.closest('#sidebarMenu')) {
+                ttsSection.classList.remove('active');
+            }
+        });
+
+        // Enhanced showTTSSection function
+function showTTSSection(event) {
+    if (event) {
+        event.preventDefault();
+    }
+    
+    // Remove active class from all links
+    document.querySelectorAll('#sidebarMenu a').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Add active class to podcast link
+    document.querySelector('.podcast-link').classList.add('active');
+    
+    // Show the TTS section
+    const ttsSection = document.querySelector('.text-to-speech-section');
+    ttsSection.classList.add('active');
+    
+    // Add slide-in animation
+    ttsSection.style.animation = 'slideIn 0.5s ease forwards';
+    
+    // Show toast notification
+    showToast('Text to Podcast converter opened');
+    
+    // Handle mobile view
+    if (window.innerWidth <= 768) {
+        // Close sidebar in mobile view
+        document.getElementById('sidebar').classList.remove('active');
+        // Smooth scroll to TTS section
+        ttsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// Update close handling to remove active state
+document.addEventListener('click', function(e) {
+    const ttsSection = document.querySelector('.text-to-speech-section');
+    const ttsToggle = document.getElementById('ttsToggle');
+    const podcastLink = document.querySelector('.podcast-link');
+    
+    if (!ttsSection.contains(e.target) && 
+        !ttsToggle.contains(e.target) && 
+        !e.target.closest('#sidebarMenu')) {
+        ttsSection.classList.remove('active');
+        podcastLink.classList.remove('active');
+    }
+});
+
+// Handle escape key to close TTS section
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const ttsSection = document.querySelector('.text-to-speech-section');
+        const podcastLink = document.querySelector('.podcast-link');
+        ttsSection.classList.remove('active');
+        podcastLink.classList.remove('active');
+    }
+});
     </script>
 </body>
 </html>
