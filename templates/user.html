@@ -533,7 +533,20 @@
 }
 
 #sidebarMenu .podcast-link.active::after {
-    transform: translateX(0);
+    transform: translateX(0);}
+
+#uploadForm{
+
+    padding-left: 500px;
+
+}
+
+#audioPlayers{
+    align-items: center;
+    justify-content: center;
+    padding-left: 300px;
+    padding-right: 300px;
+}
     </style>
 </head>
 <body>
@@ -568,7 +581,7 @@
             <h1>📚 EduTech User</h1>
             <nav>
                 <ul id="sidebarMenu">
-                    <li><a href="#" onclick="showSection('home')">🏠 Home</a></li>
+                    <li><a href="/" onclick="showSection('home')">🏠 Home</a></li>
                     <li><a href="#" onclick="showSection('files')">📁 Files</a></li>
                     <li><a href="#" onclick="showSection('quizzes')">📝 Quizzes</a></li>
                     <li><a href="#" onclick="showSection('settings')">⚙️ Settings</a></li>
@@ -613,9 +626,9 @@
     
     
     
-    <div class="text-to-speech-section">
+    <!-- <div class="text-to-speech-section">
         <h2>Text to Speech Converter</h2>
-        <form id="uploadForm" action="/convert" method="post" enctype="multipart/form-data">
+        <form id="uploadForm" href="/convert" method="post" >
             <div class="form-group">
                 <label for="fileInput">Upload Document (PDF, DOC, Image)</label>
                 <input type="file" id="fileInput" name="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
@@ -624,11 +637,66 @@
         </form>
         <audio id="a
         udioPlayer" class="audio-player" controls></audio>
+    </div> -->
+
+
+    <!-- <div class="text-to-speech-section">
+        <h2>Text to Speech Converter</h2>
+        <form id="uploadForm" action="/convert" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="fileInput">Upload Document (PDF, DOC, Image)</label>
+                <input type="file" id="fileInput" name="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+            </div>
+            <button type="submit" class="btn">Convert to Audio</button>
+        </form>
+        <audio id="audioPlayer" controls style="display:none;"></audio>
+        <a id="downloadLink" href="#" style="display:none;">Download Audio</a>
     </div>
-    
+      -->
+
+     
+     <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="file" accept=".txt,.pdf" required>
+        <button type="submit">Convert to Podcast</button>
+    </form>
+
+    <div id="audioPlayers">
+    <h3>Generated Podcast:</h3>
+    <audio id="audioPlayer" id="uploadForm" controls style="display: none;">
+        <source id="audioSource" src="" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    </div>
 
 
+
+     
     <script>
+
+
+        document.getElementById("uploadForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            let formData = new FormData();
+            let fileInput = document.getElementById("fileInput").files[0];
+            formData.append("file", fileInput);
+
+            let response = await fetch('/convert', {
+    method: 'POST',
+    body: formData
+});
+
+            let result = await response.json();
+            if (result.success) {
+                document.getElementById("audioSource").src = result.audio_url;
+                document.getElementById("audioPlayer").style.display = "block";
+                document.getElementById("audioPlayer").load();
+            } else {
+                alert("Error: " + result.error);
+            }
+        });
+
+
         // Sample data
         const files = [
             { name: 'Lesson 1', type: 'PDF', size: '2.4 MB', date: '2024-01-15' },
@@ -750,124 +818,39 @@
             displayQuizzes(filteredQuizzes);
         }
 
-        function showTTSSection() {
-            const ttsSection = document.querySelector('.text-to-speech-section');
-            ttsSection.classList.add('active');
-            
-            // Smooth scroll to TTS section on mobile
-            if (window.innerWidth <= 768) {
-                ttsSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-        
-        // Toggle TTS Section with arrow
-        document.getElementById('ttsToggle').addEventListener('click', function() {
-            const ttsSection = document.querySelector('.text-to-speech-section');
-            ttsSection.classList.toggle('active');
-        });
-        
-        // Handle file upload and conversion
-        document.getElementById('uploadForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const fileInput = document.getElementById('fileInput');
-            if (fileInput.files.length > 0) {
-                // Show loading state
-                const btn = document.querySelector('.btn');
-                const originalText = btn.textContent;
-                btn.textContent = 'Converting...';
-                btn.disabled = true;
-                
-                // Simulate conversion process
-                setTimeout(() => {
-                    // Show success message
-                    const success = document.createElement('div');
-                    success.className = 'conversion-success show';
-                    success.textContent = '✓ Conversion Complete!';
-                    document.getElementById('uploadForm').appendChild(success);
-                    
-                    // Show audio player
-                    const audioPlayer = document.getElementById('audioPlayer');
-                    audioPlayer.classList.add('visible');
-                    
-                    // Reset button
-                    btn.textContent = originalText;
-                    btn.disabled = false;
-                    
-                    // Show toast
-                    showToast('Audio conversion completed successfully!');
-                }, 2000);
-            }
-        });
-        
-        // Close TTS section when clicking outside
-        document.addEventListener('click', function(e) {
-            const ttsSection = document.querySelector('.text-to-speech-section');
-            const ttsToggle = document.getElementById('ttsToggle');
-            
-            if (!ttsSection.contains(e.target) && 
-                !ttsToggle.contains(e.target) && 
-                !e.target.closest('#sidebarMenu')) {
-                ttsSection.classList.remove('active');
-            }
-        });
+//         document.getElementById('uploadForm').addEventListener('submit', function(e) {
+//     e.preventDefault();
+    
+//     const fileInput = document.getElementById('fileInput');
+//     const formData = new FormData();
+//     formData.append('file', fileInput.files[0]);
 
-        // Enhanced showTTSSection function
-function showTTSSection(event) {
-    if (event) {
-        event.preventDefault();
-    }
-    
-    // Remove active class from all links
-    document.querySelectorAll('#sidebarMenu a').forEach(link => {
-        link.classList.remove('active');
-    });
-    
-    // Add active class to podcast link
-    document.querySelector('.podcast-link').classList.add('active');
-    
-    // Show the TTS section
-    const ttsSection = document.querySelector('.text-to-speech-section');
-    ttsSection.classList.add('active');
-    
-    // Add slide-in animation
-    ttsSection.style.animation = 'slideIn 0.5s ease forwards';
-    
-    // Show toast notification
-    showToast('Text to Podcast converter opened');
-    
-    // Handle mobile view
-    if (window.innerWidth <= 768) {
-        // Close sidebar in mobile view
-        document.getElementById('sidebar').classList.remove('active');
-        // Smooth scroll to TTS section
-        ttsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-}
+//     fetch('/convert', {
+//         method: 'POST',
+//         body: formData
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
+//         return response.blob(); // Get the audio file as a blob
+//     })
+//     .then(blob => {
+//         const audioURL = URL.createObjectURL(blob);
+//         const audioPlayer = document.getElementById('audioPlayer');
+//         audioPlayer.src = audioURL;
+//         audioPlayer.style.display = 'block'; // Show the audio player
+//         audioPlayer.play(); // Automatically play the audio
 
-// Update close handling to remove active state
-document.addEventListener('click', function(e) {
-    const ttsSection = document.querySelector('.text-to-speech-section');
-    const ttsToggle = document.getElementById('ttsToggle');
-    const podcastLink = document.querySelector('.podcast-link');
-    
-    if (!ttsSection.contains(e.target) && 
-        !ttsToggle.contains(e.target) && 
-        !e.target.closest('#sidebarMenu')) {
-        ttsSection.classList.remove('active');
-        podcastLink.classList.remove('active');
-    }
-});
-
-// Handle escape key to close TTS section
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        const ttsSection = document.querySelector('.text-to-speech-section');
-        const podcastLink = document.querySelector('.podcast-link');
-        ttsSection.classList.remove('active');
-        podcastLink.classList.remove('active');
-    }
-});
+//         // Update download link
+//         const downloadLink = document.getElementById('downloadLink');
+//         downloadLink.href = audioURL;
+//         downloadLink.style.display = 'block'; // Show the download link
+//     })
+//     .catch(error => {
+//         console.error('There was a problem with the fetch operation:', error);
+//     });
+// });
     </script>
 </body>
 </html>
