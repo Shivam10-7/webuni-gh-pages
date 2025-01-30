@@ -606,11 +606,15 @@
 
             <!-- Files Section -->
             <div class="file-section">
-                <h2>📁 Available Files</h2>
-                <div class="file-controls">
-                    <input type="text" class="search-bar" placeholder="Search files..." onkeyup="searchFiles()">
+                <h2>Available Files</h2>
+                <div class="file-grid">
+                    {% for file in files %}
+                        <div class="stat-card">
+                            <h3>{{ file.name }}</h3>
+                            <a href="{{ file.url }}" class="action-button">Download</a>
+                        </div>
+                    {% endfor %}
                 </div>
-                <div class="file-grid" id="availableFiles"></div>
             </div>
 
             <!-- Quiz Section -->

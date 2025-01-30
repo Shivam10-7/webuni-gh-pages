@@ -1,15 +1,28 @@
-from flask import Flask,render_template,request,send_file,jsonify,send_from_directory
+from flask import Flask,render_template,request,send_file,jsonify,send_from_directory,redirect,url_for
 from gtts import gTTS
 import os
 import PyPDF2
 from PIL import Image
 import pytesseract
 from werkzeug.utils import secure_filename
+import cloudinary
+import cloudinary.uploader
+
+# result = cloudinary.uploader.upload("path_to_your_file")
+# print(result)
+
 
 # from transformers import AutoModelForCausalLM, AutoTokenizer;
 
 #error while importing render_template form flask module (error mentions no module named flask found )
 app = Flask(__name__)
+
+cloudinary.config(
+    cloud_name="djr33abwe",
+    api_key="326571775883622",
+    api_secret="m8pWggycsPmoUUR6y9vYuWwAliY"
+)
+
 
 
 UPLOAD_FOLDER = "uploads"
@@ -125,15 +138,41 @@ def elements():
 
 @app.route("/user")
 def user():
-    return render_template('user.html')
-# Route to handle file upload and conversion
+    # Fetch list of uploaded files from Cloudinary (optional)
+    files = []  # Placeholder for file list
+    return render_template('user.html', files=files)
 
 
 
 
-@app.route("/admin")
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    return render_template('wrefw.html')
+    if request.method == 'POST':
+        # Handle file upload
+        if 'file' not in request.files:
+            return "No file part", 400
+
+        file = request.files['file']
+        if file.filename == '':
+            return "No selected file", 400
+
+        # Upload file to Cloudinary
+        try:
+            upload_result = cloudinary.uploader.upload(file)
+            print("File uploaded successfully:", upload_result['url'])  # Debugging
+        except Exception as e:
+            return f"Error uploading file: {str(e)}", 500
+
+        return redirect(url_for('admin'))
+
+    # Render the admin page for GET requests
+    return render_template('admin.html')
+
+
+    # Render the admin page for GET requests
+    return render_template('admin.html')
+
+
 
 @app.route("/addlog")
 def addlog():
