@@ -547,6 +547,213 @@
     padding-left: 300px;
     padding-right: 300px;
 }
+
+
+.file-section {
+            margin: 20px;
+        }
+        .file-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .file-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .search-bar {
+            margin-bottom: 10px;
+        }
+
+
+
+        .file-section {
+            margin: 20px;
+        }
+        .file-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .file-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .search-bar {
+            margin-bottom: 10px;
+        }
+
+
+
+
+        /* Text-to-Speech Section Styling */
+.text-to-speech-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #E0E0E0;
+}
+
+.text-to-speech-section:hover {
+    box-shadow: 0 5px 15px rgba(227, 24, 55, 0.1);
+}
+
+.text-to-speech-section h2 {
+    color: #E31837;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #E0E0E0;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background-color: #F8F8F8;
+}
+
+.form-group input[type="file"]:hover {
+    border-color: #E31837;
+}
+
+.form-group input[type="file"]:focus {
+    outline: none;
+    border-color: #E31837;
+    box-shadow: 0 0 5px rgba(227, 24, 55, 0.2);
+}
+
+.btn {
+    background-color: #E31837;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn:hover {
+    background-color: #C4162F;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(227, 24, 55, 0.2);
+}
+
+/* .audio-player {
+    margin-top: 20px;
+    width: 100%;
+    display: none;
+    border-radius: 5px;
+    background-color: #F8F8F8;
+}
+
+.audio-player.visible {
+    display: block;
+}
+
+/* Style for the audio controls */
+/* .audio-player::-webkit-media-controls-panel {
+    background-color: #F8F8F8;
+    border-radius: 5px;
+}
+
+.audio-player::-webkit-media-controls-play-button {
+    background-color: #E31837;
+    border-radius: 50%;
+    color: white;
+} */
+
+/* Responsive adjustments */
+/* @media (max-width: 768px) {
+    .text-to-speech-section {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+} */ 
+
+
+.text-to-speech-section {
+    text-align: center;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-to-speech-section h2 {
+    color: #333;
+}
+
+.text-to-speech-section .form-group {
+    margin-bottom: 15px;
+}
+
+.text-to-speech-section input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.text-to-speech-section .btn {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.text-to-speech-section .btn:hover {
+    background: #0056b3;
+}
+
+#audioPlayers {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#audioPlayer {
+    margin-top: 10px;
+    width: 100%;
+}
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -565,14 +772,14 @@
         </div>
     </div>
 
-
-    <div class="tts-toggle" id="ttsToggle"></div>
+<!-- 
+    <div class="tts-toggle" id="ttsToggle"></div> -->
 
 <!-- Modified navigation item in sidebar -->
-<ul id="sidebarMenu">
+<!-- <ul id="sidebarMenu"> -->
     <!-- ... other menu items ... -->
-    <li><a href="#" onclick="showTTSSection()">🎤 Text to Podcast</a></li>
-</ul>
+    <!-- <li><a href="#" onclick="showTTSSection()">🎤 Text to Podcast</a></li>
+</ul> -->
 
 
     <div class="dashboard">
@@ -586,6 +793,7 @@
                     <li><a href="#" onclick="showSection('quizzes')">📝 Quizzes</a></li>
                     <li><a href="#" onclick="showSection('settings')">⚙️ Settings</a></li>
                     <li><a href="#" class="podcast-link" onclick="showTTSSection(event)">🎙️ Text to Podcast</a></li>
+                    <li><a href="https://personalized--chatbot.streamlit.app/" onclick="showSection('settings')">🤖 Personalized ChatBot</a></li>
                 </ul>
             </nav>
         </div>
@@ -605,18 +813,37 @@
             </div>
 
             <!-- Files Section -->
-            <div class="file-section">
-                <h2>Available Files</h2>
-                <div class="file-grid">
-                    {% for file in files %}
-                        <div class="stat-card">
-                            <h3>{{ file.name }}</h3>
-                            <a href="{{ file.url }}" class="action-button">Download</a>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
+            <section id="files">
+                <div class="file-section">
 
+                    <h2>Available Files</h2>
+        <div class="file-controls">
+            <input type="text" class="search-bar" placeholder="Search files..." onkeyup="searchFiles()">
+        </div>
+        <div class="file-grid" id="uploadedFiles">
+            {% for file in files %}
+                <div class="file-item">
+                    <h4>{{ file.name }}</h4>
+                    <p>Type: {{ file.type }}</p>
+                    <p>Date: {{ file.date }}</p>
+                    <p>Size: {{ file.size }}</p>
+                    <a href="{{ file.url }}" target="_blank">Download</a>
+                </div>
+            {% endfor %}
+        </div>
+    
+
+        </section>
+
+
+
+
+
+            
+
+
+        
+            
             <!-- Quiz Section -->
             <div class="file-section">
                 <h2>📝 Available Quizzes</h2>
@@ -658,24 +885,62 @@
     </div>
       -->
 
-     
-     <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" id="fileInput" name="file" accept=".txt,.pdf" required>
-        <button type="submit">Convert to Podcast</button>
+
+    <!-- Text-to-Speech Section -->
+<!-- <div class="text-to-speech-section">
+    <h2>🎙️ Text to Speech Converter</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="fileInput">Upload Document (PDF, DOC, TXT, Image)</label>
+            <input type="file" id="fileInput" name="file" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png" required>
+        </div>
+        <button type="submit" class="btn">Convert to Audio</button>
     </form>
-
     <div id="audioPlayers">
-    <h3>Generated Podcast:</h3>
-    <audio id="audioPlayer" id="uploadForm" controls style="display: none;">
-        <source id="audioSource" src="" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
+        <h3>Generated Audio:</h3>
+        <audio id="audioPlayer" controls style="display: none;">
+            <source id="audioSource" src="" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
     </div>
+</div> -->
 
 
+     
+<form id="uploadForm" action="/convert" enctype="multipart/form-data">
+    <input type="file" id="fileInput" name="file" accept=".txt,.pdf" required>
+    <button type="submit">Convert to Podcast</button>
+</form>
+
+<div id="audioPlayers">
+<h3>Generated Podcast:</h3>
+<audio id="audioPlayer" id="uploadForm" controls style="display: none;">
+    <source id="audioSource" src="" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
+</div>
 
      
     <script>
+
+
+
+
+// Function to upload file
+function searchFiles() {
+            const query = event.target.value.toLowerCase();
+            const items = Array.from(document.querySelectorAll('.file-item'));
+            items.forEach(item => {
+                const name = item.querySelector('h4').textContent.toLowerCase();
+                if (name.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+
 
 
         document.getElementById("uploadForm").addEventListener("submit", async function(event) {
@@ -685,14 +950,15 @@
             let fileInput = document.getElementById("fileInput").files[0];
             formData.append("file", fileInput);
 
-            let response = await fetch('/convert', {
+            let response =await fetch('/convert', {
     method: 'POST',
     body: formData
 });
 
             let result = await response.json();
             if (result.success) {
-                document.getElementById("audioSource").src = result.audio_url;
+                document.getElementById("audioSource").src = window.location.origin + result.audio_url;
+
                 document.getElementById("audioPlayer").style.display = "block";
                 document.getElementById("audioPlayer").load();
             } else {
@@ -822,6 +1088,8 @@
             displayQuizzes(filteredQuizzes);
         }
 
+
+
 //         document.getElementById('uploadForm').addEventListener('submit', function(e) {
 //     e.preventDefault();
     
@@ -855,6 +1123,31 @@
 //         console.error('There was a problem with the fetch operation:', error);
 //     });
 // });
+
+document.getElementById("uploadForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            let formData = new FormData();
+            let fileInput = document.getElementById("fileInput").files[0];
+            formData.append("file", fileInput);
+
+            let response = await fetch('/convert', {
+    method: 'POST',
+    body: formData
+});
+
+            let result = await response.json();
+            if (result.success) {
+                document.getElementById("audioSource").src = result.audio_url;
+                document.getElementById("audioPlayer").style.display = "block";
+                document.getElementById("audioPlayer").load();
+            } else {
+                alert("Error: " + result.error);
+            }
+        });
+
+
+
     </script>
 </body>
 </html>

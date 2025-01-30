@@ -1,39 +1,11 @@
-from flask import Flask, request, render_template, redirect, url_for
-import cloudinary
-import cloudinary.uploader
+from flask import request
 
-app = Flask(__name__)
-
-# Configure Cloudinary
-cloudinary.config(
-    cloud_name="djr33abwe",
-    api_key="326571775883622",
-    api_secret="m8pWggycsPmoUUR6y9vYuWwAliY"
-)
-
-# Route for the admin page
-@app.route('/admin', methods=['GET', 'POST'])
-def admin():
-    if request.method == 'POST':
-        # Handle file upload
-        if 'file' not in request.files:
-            return "No file part", 400
-
-        file = request.files['file']
-        if file.filename == '':
-            return "No selected file", 400
-
-        # Upload file to Cloudinary
-        try:
-            upload_result = cloudinary.uploader.upload(file)
-            print("File uploaded successfully:", upload_result['url'])  # Debugging
-        except Exception as e:
-            return f"Error uploading file: {str(e)}", 500
-
-        return redirect(url_for('admin'))
-
-    # Render the admin page for GET requests
-    return render_template('admin.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/user')
+def user():
+    file = request.args.get('file')  # Get the 'file' query parameter
+    if file:
+        # Handle the file parameter (e.g., display or process the file)
+        return f"File requested: {file}"
+    else:
+        # Handle the case where no file parameter is provided
+        return "No file specified."

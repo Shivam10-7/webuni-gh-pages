@@ -5,6 +5,7 @@ import PyPDF2
 from PIL import Image
 import pytesseract
 from werkzeug.utils import secure_filename
+from datetime import datetime
 import cloudinary
 import cloudinary.uploader
 
@@ -22,6 +23,8 @@ cloudinary.config(
     api_key="326571775883622",
     api_secret="m8pWggycsPmoUUR6y9vYuWwAliY"
 )
+
+uploads= []
 
 
 
@@ -64,7 +67,7 @@ def convert_text_to_audio(text, filename="output.mp3"):
 
 
 
-@app.route("/convert", methods=["POST"])
+@app.route("/convert", methods=['GET', 'POST'])
 def convert():
     if "file" not in request.files:
         return jsonify({"success": False, "error": "No file uploaded"})
@@ -124,9 +127,9 @@ def index():
 def contact():
     return render_template('contact.html')
 
-@app.route("/courses")
+@app.route("/addlog")
 def courses():
-    return render_template('courses.html')
+    return render_template('admin_login.html')
 
 @app.route("/blog")
 def blog():
@@ -136,47 +139,60 @@ def blog():
 def elements():
     return render_template('elements.html')
 
-@app.route("/user")
-def user():
-    # Fetch list of uploaded files from Cloudinary (optional)
-    files = []  # Placeholder for file list
-    return render_template('user.html', files=files)
+# @app.route("/user")
+# def user():
+#     # Fetch list of uploaded files from Cloudinary (optional)
+#     files = []  # Placeholder for file list
+#     return render_template('user.html', files=files)
 
 
 
-
-@app.route('/admin', methods=['GET', 'POST'])
+@app.route('/admin', methods=['POST','GET'])
 def admin():
     if request.method == 'POST':
         # Handle file upload
         if 'file' not in request.files:
-            return "No file part", 400
+            return jsonify({"error": "No file part"}), 400
 
         file = request.files['file']
         if file.filename == '':
-            return "No selected file", 400
+            return jsonify({"error": "No selected file"}), 400
 
         # Upload file to Cloudinary
         try:
             upload_result = cloudinary.uploader.upload(file)
             print("File uploaded successfully:", upload_result['url'])  # Debugging
+
+            # Save file metadata
+            file_metadata = {
+                'id': len(uploads) + 1,  # Auto-increment ID
+                'name': file.filename,
+                'type': 'file',  # You can customize this based on file type
+                'date': datetime.now().strftime('%Y-%m-%d'),  # Current date
+                'size': f"{(upload_result['bytes'] / 1024 / 1024):.2f}MB",  # Convert bytes to MB
+                'url': upload_result['url']  # Cloudinary URL
+            }
+            uploads.append(file_metadata)
+
+            return jsonify(file_metadata)  # Return metadata to the frontend
         except Exception as e:
-            return f"Error uploading file: {str(e)}", 500
-
-        return redirect(url_for('admin'))
+            return jsonify({"error": str(e)}), 500
 
     # Render the admin page for GET requests
-    return render_template('admin.html')
-
-
-    # Render the admin page for GET requests
-    return render_template('admin.html')
+    return render_template('admin.html', files=uploads)
 
 
 
-@app.route("/addlog")
-def addlog():
-    return render_template("admin_login.html")
+@app.route('/user')
+def user():
+        if request.args.get('file'):
+            return redirect(url_for('user')) 
+        return render_template('user.html', files=uploads)
+
+# Route to fetch uploaded files
+@app.route('/files', methods=['GET'])
+def get_files():
+    return jsonify(uploads)
 
 
 
