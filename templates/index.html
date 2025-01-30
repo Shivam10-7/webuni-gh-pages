@@ -13,11 +13,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
 
 	<!-- Stylesheets -->
-	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/> -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.css') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+	<!-- <link rel="stylesheet" href="/static/css/bootstrap.min.css"/> -->
+	<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/owl.carousel.css">
+	<link rel="stylesheet" href="/static/css/style.css"/>
 
 
 	<!--[if lt IE 9]>
@@ -26,20 +26,6 @@
 	<![endif]-->
 
 </head>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".set-bg").forEach(function(el) {
-            let bg = el.getAttribute("data-setbg");
-            if (bg) {
-                el.style.backgroundImage = `url(${bg})`;
-            } else {
-                console.error("No data-setbg found for element:", el);
-            }
-        });
-    });
-</script>
-
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -56,7 +42,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-3">
 					<div class="site-logo">
-						<img src="{{ url_for('static', filename='img/logo.png') }}" alt="There must be an image here ">
+						<img src="/static/img/logo.png" alt="There must be an image here ">
 					</div>
 					<div class="nav-switch">
 						<i class="fa fa-bars"></i>
@@ -82,7 +68,7 @@
 
 
 	<!-- Hero section -->
-	<section class="hero-section set-bg" data-setbg="{{ url_for('static', filename='img/bg.jpg') }}">
+	<section class="hero-section set-bg" data-setbg="/static/img/bg.jpg">
 		<div class="container">
 			<div class="hero-text text-white">
 				<h2>A Smart and Reliable Platform for All Your Tasks in One Place</h2>
@@ -102,86 +88,36 @@
 	<!-- Hero section end -->
 
 
-	<!-- categories section -->
-	<section class="categories-section spad">
-		<div class="container">
-			<div class="section-title">
-				<h2>Our Course Categories</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-			</div>
-			<div class="row">
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/1.jpg"></div>
-						<div class="ci-text">
-							<h5>IT Development</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>120 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/2.jpg"></div>
-						<div class="ci-text">
-							<h5>Web Design</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>70 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/3.jpg"></div>
-						<div class="ci-text">
-							<h5>Illustration & Drawing</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>55 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/4.jpg"></div>
-						<div class="ci-text">
-							<h5>Social Media</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>40 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/5.jpg"></div>
-						<div class="ci-text">
-							<h5>Photoshop</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>220 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/6.jpg"></div>
-						<div class="ci-text">
-							<h5>Cryptocurrencies</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>25 Courses</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- categories section end -->
+<!-- categories section -->
+<div class="container">
+    <div class="section-title">
+        <h2>Explore EduTech</h2>
+        <p>Find the right resources and courses to enhance your learning journey.</p>
+    </div>
 
+    <div class="row">
+        <div class="col-lg-4 col-md-6">
+            <div class="category-item hover-container">
+                <h3>Technology</h3>
+                <p>We've used AI, cloud computing, and responsive web development for a scalable and secure platform.</p>
+            </div>
+        </div>
 
+        <div class="col-lg-4 col-md-6">
+            <div class="category-item hover-container">
+                <h3>Business</h3>
+                <p>We have scalable and upgradeable technology for feature monetization on our website.</p>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="category-item hover-container">
+                <h3>Feedback</h3>
+                <p>We have received positive feedback from all of our users.</p>
+            </div>
+        </div>
+    </div>
+</div>
 	<!-- search section -->
 	<section class="search-section">
 		<div class="container">
@@ -226,7 +162,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 finance">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/1.jpg">
-							<div class="price">Price: ₹1500</div>
+							<div class="price">Price: $15</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -245,7 +181,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 design">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/2.jpg">
-							<div class="price">Price: ₹1500</div>
+							<div class="price">Price: $15</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -264,7 +200,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 web">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/3.jpg">
-							<div class="price">Price: ₹1500</div>
+							<div class="price">Price: $15</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -283,7 +219,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 photo">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/4.jpg">
-							<div class="price">Price: ₹1500</div>
+							<div class="price">Price: $15</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -302,7 +238,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 finance">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/5.jpg">
-							<div class="price">Price: ₹1500</div>
+							<div class="price">Price: $15</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -321,7 +257,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 design">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/6.jpg">
-							<div class="price">Price: ₹1500</div>
+							<div class="price">Price: $15</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -340,7 +276,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 web">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/7.jpg">
-							<div class="price">Price: ₹1500</div>
+							<div class="price">Price: $15</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -359,7 +295,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 photo">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/8.jpg">
-							<div class="price">Price: ₹1500</div>
+							<div class="price">Price: $15</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -497,22 +433,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 	<!--====== Javascripts & Jquery ======-->
-	<script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }} "></script>
-	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }} "></script>
+	<script src="/static/js/jquery-3.2.1.min.js "></script>
+	<script src="/static/js/bootstrap.min.js "></script>
 	<script src="https://cdn.jsdelivr.net/npm/mixitup/dist/mixitup.min.js"></script> 
-	<script src="{{ url_for('static', filename='js/circle-progress.min.js') }}"></script>
+	<script src="/static/js/circle-progress.min.js"></script>
 
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".set-bg").forEach(function(el) {
-            let bg = el.getAttribute("data-setbg");
-            if (bg) {
-                el.style.backgroundImage = `url(${bg})`;
-            }
-        });
-    });
-</script>
+<script src="/static/js/main.js"></script>
 
 
 </html>
