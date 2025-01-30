@@ -26,6 +26,20 @@
 	<![endif]-->
 
 </head>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".set-bg").forEach(function(el) {
+            let bg = el.getAttribute("data-setbg");
+            if (bg) {
+                el.style.backgroundImage = `url(${bg})`;
+            } else {
+                console.error("No data-setbg found for element:", el);
+            }
+        });
+    });
+</script>
+
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -99,7 +113,7 @@
 				<!-- categorie -->
 				<div class="col-lg-4 col-md-6">
 					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/1.jpg"></div>
+						<div class="ci-thumb set-bg" data-setbg="{{ url_for('static', filename='img/categories/1.jpg') }}"></div>
 						<div class="ci-text">
 							<h5>IT Development</h5>
 							<p>Lorem ipsum dolor sit amet, consectetur</p>
@@ -110,7 +124,7 @@
 				<!-- categorie -->
 				<div class="col-lg-4 col-md-6">
 					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/2.jpg"></div>
+						<div class="ci-thumb set-bg" data-setbg="{{ url_for('static', filename='img/categories/2.jpg') }}"></div>
 						<div class="ci-text">
 							<h5>Web Design</h5>
 							<p>Lorem ipsum dolor sit amet, consectetur</p>
@@ -121,7 +135,7 @@
 				<!-- categorie -->
 				<div class="col-lg-4 col-md-6">
 					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/3.jpg"></div>
+						<div class="ci-thumb set-bg" data-setbg="{{ url_for('static', filename='img/categories/3.jpg') }}"></div>
 						<div class="ci-text">
 							<h5>Illustration & Drawing</h5>
 							<p>Lorem ipsum dolor sit amet, consectetur</p>
@@ -132,7 +146,7 @@
 				<!-- categorie -->
 				<div class="col-lg-4 col-md-6">
 					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/4.jpg"></div>
+						<div class="ci-thumb set-bg" data-setbg="{{ url_for('static', filename='img/categories/4.jpg') }}"></div>
 						<div class="ci-text">
 							<h5>Social Media</h5>
 							<p>Lorem ipsum dolor sit amet, consectetur</p>
@@ -143,7 +157,7 @@
 				<!-- categorie -->
 				<div class="col-lg-4 col-md-6">
 					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/5.jpg"></div>
+						<div class="ci-thumb set-bg" data-setbg="{{ url_for('static', filename='img/categories/5.jpg') }}"></div>
 						<div class="ci-text">
 							<h5>Photoshop</h5>
 							<p>Lorem ipsum dolor sit amet, consectetur</p>
@@ -154,7 +168,7 @@
 				<!-- categorie -->
 				<div class="col-lg-4 col-md-6">
 					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/6.jpg"></div>
+						<div class="ci-thumb set-bg" data-setbg="{{ url_for('static', filename='img/categories/6.jpg') }}"></div>
 						<div class="ci-text">
 							<h5>Cryptocurrencies</h5>
 							<p>Lorem ipsum dolor sit amet, consectetur</p>
@@ -212,7 +226,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 finance">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/1.jpg">
-							<div class="price">Price: $15</div>
+							<div class="price">Price: ₹1500</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -231,7 +245,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 design">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/2.jpg">
-							<div class="price">Price: $15</div>
+							<div class="price">Price: ₹1500</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -250,7 +264,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 web">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/3.jpg">
-							<div class="price">Price: $15</div>
+							<div class="price">Price: ₹1500</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -269,7 +283,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 photo">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/4.jpg">
-							<div class="price">Price: $15</div>
+							<div class="price">Price: ₹1500</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -288,7 +302,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 finance">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/5.jpg">
-							<div class="price">Price: $15</div>
+							<div class="price">Price: ₹1500</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -307,7 +321,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 design">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/6.jpg">
-							<div class="price">Price: $15</div>
+							<div class="price">Price: ₹1500</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -326,7 +340,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 web">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/7.jpg">
-							<div class="price">Price: $15</div>
+							<div class="price">Price: ₹1500</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -345,7 +359,7 @@
 				<div class="mix col-lg-3 col-md-4 col-sm-6 photo">
 					<div class="course-item">
 						<div class="course-thumb set-bg" data-setbg="img/courses/8.jpg">
-							<div class="price">Price: $15</div>
+							<div class="price">Price: ₹1500</div>
 						</div>
 						<div class="course-info">
 							<div class="course-text">
@@ -489,6 +503,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="{{ url_for('static', filename='js/circle-progress.min.js') }}"></script>
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".set-bg").forEach(function(el) {
+            let bg = el.getAttribute("data-setbg");
+            if (bg) {
+                el.style.backgroundImage = `url(${bg})`;
+            }
+        });
+    });
+</script>
 
 
 </html>
