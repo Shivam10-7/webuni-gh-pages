@@ -40,9 +40,9 @@
 <header class="header-section" style="width: 100%; padding: 5px 0; background-color: #d1d5d8; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
     <div class="container" style="display: flex; align-items: center; justify-content: space-between; max-width: 1000px; margin: auto; padding: 0 15px;">
         <div class="site-logo" style="display: flex; align-items: center;">
-            <img src="" 
+            <img src="https://www.creativefabrica.com/wp-content/uploads/2021/10/31/GV-logo-design-vector-Graphics-19464048-1-1-580x386.jpg" 
                  alt="There must be an image here" 
-                 style="width: 120px; height: auto;">
+                 style="width: 120px; height: 60px; border-radius: 30px;">
         </div>
 
         <div class="nav-switch" style="display: none; font-size: 24px; cursor: pointer;">
@@ -219,6 +219,17 @@
 
 <!-- CSS for hiding and showing categories with animations -->
 <style>
+    .banner-section .section-title p,
+    .course-section .section-title p,
+    .section-title p {
+        font-size: 1.2rem;
+    }
+
+    .category-text p {
+        font-size: 1.1rem;
+        color: #666;
+    }
+
     .category-container {
         display: none;
         padding: 20px;
@@ -233,20 +244,31 @@
         display: block;
         opacity: 1;
         transform: translateX(0px);
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .site-btn {
+        text-decoration: none;
+        background-color: #D82A4E;
+        color: white;
+        padding: 20px 10px;
+        border-radius: 25px;
+        font-weight: bold;
     }
 
     .category-container.model.show {
         animation: bounceIn 1s ease-out;
-    }
-
-    .category-text h5 {
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-
-    .category-text p {
-        font-size: 1rem;
-        color: #666;
     }
 
     .controls .control.active {
