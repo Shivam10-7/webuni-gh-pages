@@ -12,17 +12,19 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
         .login-container {
             background-color: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 320px;
         }
         h2 {
             text-align: center;
             color: #D82A4E; /* Primary color */
+            margin-bottom: 20px;
         }
         .form-group {
             margin-bottom: 15px;
@@ -30,12 +32,33 @@
         .form-group label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
         }
         .form-group input {
             width: 100%;
             padding: 10px;
             border: 1px solid #dee2e6;
             border-radius: 5px;
+            font-size: 14px;
+        }
+        .form-group input:focus {
+            border-color: #D82A4E;
+            outline: none;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .options a {
+            color: #D82A4E;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .options a:hover {
+            text-decoration: underline;
         }
         .btn {
             width: 100%;
@@ -45,31 +68,93 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
         .btn:hover {
             background-color: #b52245; /* Darker shade for hover */
+        }
+        .btn.loading {
+            background-color: #b52245;
+            cursor: not-allowed;
+        }
+        .btn.loading::after {
+            content: "";
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h2>Admin Login</h2>
-        <form onsubmit="checkadd(); return false;">
+        <form onsubmit="handleLogin(event)">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Username" required>
+                <input type="text" id="username" placeholder="Enter username" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="password" required>
+                <input type="password" id="password" placeholder="Enter password" required>
             </div>
-            <button type="submit" class="btn">Login</button>
+            <div class="options">
+                <label>
+                    <input type="checkbox" id="remember-me"> Remember Me
+                </label>
+                <a href="#" id="forgot-password">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn" id="login-btn">Login</button>
         </form>
-
-
     </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const loginBtn = document.getElementById('login-btn');
+
+            // Basic validation
+            if (!username || !password) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Simulate loading
+            loginBtn.classList.add('loading');
+            loginBtn.disabled = true;
+
+            // Simulate a login request (replace with actual API call)
+            setTimeout(() => {
+                loginBtn.classList.remove('loading');
+                loginBtn.disabled = false;
+
+                if (username === 'admin' && password === '123') {
+                   
+                    // Redirect to admin dashboard or another page
+                    window.location.href = '/admin';
+                } else {
+                    alert('Invalid username or password.');
+                }
+            }, 20); // Simulate 2 seconds delay
+        }
+
+        // Forgot password functionality
+        document.getElementById('forgot-password').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Please contact the administrator to reset your password.');
+        });
+    </script>
 </body>
-
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
 </html>
