@@ -700,7 +700,97 @@
 } */ 
 
 
+/* General container styles */
 .text-to-speech-section {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+/* Section title */
+.text-to-speech-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 16px;
+    color: #34495e;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Button styling */
+.btn {
+    display: block;
+    width: 100%;
+    background-color: #e74c3c; /* Red color for button */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #c0392b;
+}
+
+/* Card styling for audio section */
+.card {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #e74c3c;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+#audioPlayer {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Optional: Search bar styles (if needed) */
+.search-bar {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+
+
+/* .text-to-speech-section {
     text-align: center;
     background: #f8f9fa;
     padding: 20px;
@@ -748,7 +838,7 @@
     margin-top: 10px;
     width: 100%;
 }
-
+ */
 
 
 
@@ -854,6 +944,23 @@
             </div>
         </div>
     </div>
+    <div class = "file-section" >
+        <h2>🎙️ Text to Speech Converter</h2>
+        <form id="uploadForm" action="/convert" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="fileInput">Upload Document (PDF, DOC, TXT)</label>
+                <input type="file" id="fileInput" name="file" accept=".pdf,.doc,.docx,.txt" required>
+            </div>
+            <button type="submit" class="btn">Convert to Audio</button>
+        </form>
+        <div id="audioPlayers" class="card">
+            <h3>Generated Audio:</h3>
+            <audio id="audioPlayer" controls style="display: none;">
+                <source id="audioSource" src="" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
     
     
     
@@ -906,8 +1013,10 @@
 </div> -->
 
 
+
+
      
-<form id="uploadForm" action="/convert" enctype="multipart/form-data">
+<!-- <form id="uploadForm" action="/convert" enctype="multipart/form-data">
     <input type="file" id="fileInput" name="file" accept=".txt,.pdf" required>
     <button type="submit">Convert to Podcast</button>
 </form>
@@ -918,7 +1027,7 @@
     <source id="audioSource" src="" type="audio/mp3">
     Your browser does not support the audio element.
 </audio>
-</div>
+</div> -->
 
      
     <script>
