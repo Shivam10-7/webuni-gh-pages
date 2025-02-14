@@ -1,4 +1,5 @@
 from flask import Flask,render_template,request,send_file,jsonify,send_from_directory,redirect,url_for
+from flask_sqlalchemy import SQLAlchemy
 from gtts import gTTS
 import os
 import PyPDF2
