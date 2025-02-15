@@ -3,154 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <title>About Geek Velocity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --geek-red: #e31837;
+            --pure-white: #ffffff;
+            --carbon: #2d2d2d;
+            --transition: cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+        }
+
         body {
-            background-color: #f0f2f5;
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', system-ui;
+            line-height: 1.6;
+            background: var(--pure-white);
+            color: var(--carbon);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(45deg, var(--geek-red), #c41230);
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-container {
-            background-color: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 320px;
-        }
-        h2 {
+            justify-content: center;
+            color: var(--pure-white);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
             text-align: center;
-            color: #D82A4E; /* Primary color */
-            margin-bottom: 20px;
         }
-        .form-group {
-            margin-bottom: 15px;
+
+        .team-name {
+            font-size: 4rem;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
+
+        /* Team Grid */
+        .team-grid {
+            max-width: 1200px;
+            margin: -80px auto 0;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            font-size: 14px;
+
+        .member-card {
+            background: var(--pure-white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid rgba(227,24,55,0.1);
         }
-        .form-group input:focus {
-            border-color: #D82A4E;
-            outline: none;
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(227,24,55,0.1);
         }
-        .options {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 15px;
-        }
-        .options a {
-            color: #D82A4E;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .options a:hover {
-            text-decoration: underline;
-        }
-        .btn {
-            width: 100%;
-            padding: 10px;
-            background-color: #D82A4E; /* Primary color */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #b52245; /* Darker shade for hover */
-        }
-        .btn.loading {
-            background-color: #b52245;
-            cursor: not-allowed;
-        }
-        .btn.loading::after {
-            content: "";
+
+        .role-badge {
+            background: rgba(227,24,55,0.1);
+            color: var(--geek-red);
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
             display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #fff;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-            margin-left: 10px;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            font-weight: 500;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+        /* Values Section */
+        .values-section {
+            background: var(--geek-red);
+            color: var(--pure-white);
+            padding: 6rem 2rem;
+            margin: 4rem 0;
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 90%);
+        }
+
+        .value-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .team-name { font-size: 2.5rem; }
+            .team-grid { margin-top: -40px; }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Admin Login</h2>
-        <form onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter username" required>
+    <section class="hero">
+        <div>
+            <h1 class="team-name">Geek Velocity</h1>
+            <p>Driving Technical Innovation</p>
+        </div>
+    </section>
+
+    <div class="team-grid">
+        <!-- Frontend Team -->
+        <div class="member-card">
+            <h3>Shivam Pilley</h3>
+            <div class="role-badge">Frontend Architect</div>
+            <p>UI/UX Design & Development</p>
+            <div class="expertise">
+                <i class="fas fa-palette"></i>
+                <i class="fas fa-code"></i>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter password" required>
+        </div>
+
+        <div class="member-card">
+            <h3>Rutvik Tayde</h3>
+            <div class="role-badge">Frontend Engineer</div>
+            <p>Client-Side Implementation</p>
+            <div class="expertise">
+                <i class="fas fa-mobile-alt"></i>
+                <i class="fas fa-tachometer-alt"></i>
             </div>
-            <div class="options">
-                <a href="#" id="forgot-password">Forgot Password?</a>
+        </div>
+
+        <!-- Backend Team -->
+        <div class="member-card">
+            <h3>Kushal Jain</h3>
+            <div class="role-badge">Backend Specialist</div>
+            <p>System Architecture & APIs</p>
+            <div class="expertise">
+                <i class="fas fa-server"></i>
+                <i class="fas fa-shield-alt"></i>
             </div>
-            <button type="submit" class="btn" id="login-btn">Login</button>
-        </form>
+        </div>
+
+        <div class="member-card">
+            <h3>Gitanshu Hatwar</h3>
+            <div class="role-badge">Backend Developer</div>
+            <p>Database & Security</p>
+            <div class="expertise">
+                <i class="fas fa-database"></i>
+                <i class="fas fa-lock"></i>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <h3>Mayank Patel</h3>
+            <div class="role-badge">Backend Engineer</div>
+            <p>Business Logic & Integration</p>
+            <div class="expertise">
+                <i class="fas fa-cogs"></i>
+                <i class="fas fa-project-diagram"></i>
+            </div>
+        </div>
     </div>
 
-    <script>
-        function handleLogin(event) {
-            event.preventDefault(); // Prevent form submission
-
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const loginBtn = document.getElementById('login-btn');
-
-            // Basic validation
-            if (!username || !password) {
-                alert('Please fill in all fields.');
-                return;
-            }
-
-            // Simulate loading
-            loginBtn.classList.add('loading');
-            loginBtn.disabled = true;
-
-            // Simulate a login request (replace with actual API call)
-            setTimeout(() => {
-                loginBtn.classList.remove('loading');
-                loginBtn.disabled = false;
-
-                // Check credentials
-                if (username === 'admin' && password === '123') {
-                    // Redirect to /addlog
-                    window.location.href = "/addlog";
-                } else {
-                    alert('Invalid username or password.');
-                }
-            }, 1000); // Simulate 1 second delay
-        }
-
-        // Forgot password functionality
-        document.getElementById('forgot-password').addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Please contact the administrator to reset your password.');
-        });
-    </script>
+    <section class="values-section">
+        <div class="value-card">
+            <h2>Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Velocity</h3>
+                    <p>Rapid implementation without compromising quality</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-infinity"></i>
+                    <h3>Precision</h3>
+                    <p>Pixel-perfect technical execution</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
