@@ -238,7 +238,7 @@
     align-items: center;
     z-index: 9999;
     backdrop-filter: blur(5px); /* Slight blur effect */
-    transition: opacity 0.5s ease-out;
+    transition: opacity 0.1s ease-out;
 }
 
         /* Loader container */
@@ -808,15 +808,55 @@ h2.section-title::before {
         transform: rotateZ(60deg) translate(1em, -7.5em);
     }
 }
+
+.preview-container {
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+    border: 1px solid #dee2e6;
+}
+
+.file-info {
+    padding: 10px 0;
+}
+
+.file-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.download-btn {
+    flex: 1;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #e31837;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.download-btn:hover {
+    background: #c41230;
+}
   
   
   </style>
 </head>
 <body>
     <!-- Translucent loading screen -->
-        <div id="preloader">
+        <!-- <div id="preloader">
             <div class="loader"></div>
-        </div>
+        </div> -->
 
     <!-- Mobile Menu Icon -->
     <div class="menu-icon" style="display: none;">☰</div>
@@ -884,44 +924,17 @@ h2.section-title::before {
         <div class="file-section">
             <div class="section-header">
                 <h2 class="section-title">Recent Files</h2>
-                <button class="download-btn">
+                <button class="download-btn" style="width: auto; padding: 8px 16px;">
                     <i class="fas fa-sync"></i>
                     Refresh
                 </button>
             </div>
 
-
-            <!-- Files Section
             <section id="files" style="margin-bottom: 30px;">
                 <div class="file-section">
                     <div class="file-list-header">
                         <h2 style="color: #e31837; margin-bottom: 20px;">Available Files</h2>
                         <button class="reload-button" onclick="loadFiles()">🔄 Reload</button>
-=======
-            <div class="file-grid">
-                <div class="file-card">
-                    <h4>Advanced Mathematics.pdf</h4>
-                    <div class="file-meta">
-                        <span>PDF Document</span>
-                        <span>2.4 MB</span>
-
-                    </div>
-                    <div class="file-meta">
-                        <span>Last modified: 2d ago</span>
-                    </div>
-                    <a href="#" class="download-btn">
-                        <i class="fas fa-download"></i>
-                        Download
-                    </a>
-                </div>
-<<<<<<< HEAD
-            </section> -->
-
-            <section id="files" style="margin-bottom: 30px;">
-                <div class="file-section">
-                    <div class="file-list-header">
-                        <h2 style="color: #e31837; margin-bottom: 20px;">Available Files</h2>
-                        <button class="reload-button" onclick="location.reload()">🔄 Reload</button>
                     </div>
                     <div class="file-controls" style="margin-bottom: 20px;">
                         <input type="text" class="search-bar" placeholder="Search files..." onkeyup="searchFiles()" style="width: 100%; padding: 10px; border: 2px solid #e31837; border-radius: 5px; font-size: 16px;">
@@ -942,130 +955,304 @@ h2.section-title::before {
                         {% endif %}
                         
                         <!-- Download Button -->
-                        <a href="{{ file.url }}" target="_blank">Download</a>
+                        <div class="file-actions">
+                            <button onclick="downloadFile('{{ file.url }}', '{{ file.name }}')" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
     </section>
 
-
-
-
-            <!-- Quiz Section -->
-            <div class="file-section" style="margin-bottom: 30px;">
-                <h2 style="color: #e31837; margin-bottom: 20px;">📝 Available Quizzes</h2>
-                <div class="file-controls" style="margin-bottom: 20px;">
-                    <input type="text" class="search-bar" placeholder="Search quizzes..." onkeyup="searchQuizzes()" style="width: 100%; padding: 10px; border: 2px solid #e31837; border-radius: 5px; font-size: 16px;">
-                </div>
-                <div class="file-grid" id="availableQuizzes" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;"></div>
-=======
-                <!-- Add more file cards -->
-
-            </div>
+    <!-- Quiz Section -->
+    <div class="file-section" style="margin-bottom: 30px;">
+        <h2 style="color: #e31837; margin-bottom: 20px;">📝 Available Quizzes</h2>
+        <div class="file-controls" style="margin-bottom: 20px;">
+            <input type="text" class="search-bar" placeholder="Search quizzes..." onkeyup="searchQuizzes()" style="width: 100%; padding: 10px; border: 2px solid #e31837; border-radius: 5px; font-size: 16px;">
         </div>
-
-        <!-- Quizzes Section -->
-        <div class="info-box">
-            <h3><i class="fas fa-pencil-alt"></i>Knowledge Checks</h3>
-            <p>Test your understanding with interactive quizzes. Filter available tests by topic or difficulty level, and track your completion progress over time.</p>
-        </div>
-        <div class="file-section">
-            <h2 class="section-title">Available Quizzes</h2>
-            <div class="file-grid" id="availableQuizzes">
-                <!-- Add quiz cards -->
-            </div>
-        </div>
-
-        <!-- TTS Section -->
-        <div class="tts-card">
-            <h2 class="section-title">🎙️ Text to Speech Converter</h2>
-            <form id="uploadForm" enctype="multipart/form-data">
-                <label class="upload-label">
-                    <i class="fas fa-file-upload" style="font-size: 2rem; color: var(--primary-red); margin-bottom: 1rem;"></i>
-                    <div style="font-size: 1.1rem; color: var(--primary-red); margin-bottom: 0.5rem;">
-                        Drag & drop files or click to upload
-                    </div>
-                    <div style="color: var(--medium-grey); font-size: 0.9rem;">
-                        Supported formats: PDF, DOC, TXT
-                    </div>
-                    <input type="file" id="fileInput" name="file" accept=".pdf,.doc,.docx,.txt" required style="display: none;">
-                </label>
-                <button type="submit" class="download-btn" style="margin-top: 1.5rem; width: 100%; justify-content: center;">
-                    <i class="fas fa-wave-square"></i>
-                    Convert to Audio
-                </button>
-            </form>
-            <div id="audioPlayers" class="card" style="padding: 20px; border-radius: 10px; background-color: #f8f8f8; margin-top: 20px; display: none;">
-                <h3 style="color: #e31837; margin-top: 0;">Generated Audio:</h3>
-                <audio id="audioPlayer" controls style="width: 100%; margin-top: 10px;">
-                    <source id="audioSource" src="" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </div>
+        <div class="file-grid" id="availableQuizzes" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;"></div>
     </div>
 
-    <script>
+    <!-- TTS Section -->
+    <div class="tts-card">
+        <h2 class="section-title">🎙️ Text to Speech Converter</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <label class="upload-label">
+                <i class="fas fa-file-upload" style="font-size: 2rem; color: var(--primary-red); margin-bottom: 1rem;"></i>
+                <div style="font-size: 1.1rem; color: var(--primary-red); margin-bottom: 0.5rem;">
+                    Drag & drop files or click to upload
+                </div>
+                <div style="color: var(--medium-grey); font-size: 0.9rem;">
+                    Supported formats: PDF, DOC, TXT
+                </div>
+                <input type="file" id="fileInput" name="file" accept="*/*" required style="display: none;">
+            </label>
+            <button type="submit" class="download-btn" style="margin-top: 1.5rem; width: 100%; justify-content: center;">
+                <i class="fas fa-wave-square"></i>
+                Convert to Audio
+            </button>
+        </form>
+        <div id="audioPlayers" class="card" style="padding: 20px; border-radius: 10px; background-color: #f8f8f8; margin-top: 20px; display: none;">
+            <h3 style="color: #e31837; margin-top: 0;">Generated Audio:</h3>
+            <audio id="audioPlayer" controls style="width: 100%; margin-top: 10px;">
+                <source id="audioSource" src="" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+</div>
 
-document.getElementById("uploadForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
-        let formData = new FormData();
-        let fileInput = document.getElementById("fileInput").files[0];
-        formData.append("file", fileInput);
+<script>
+// Initialize Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyBM5C2-QageRRyXI-oRpnHUd41C9DUWt3E",
+    authDomain: "greatest-project-22b73.firebaseapp.com",
+    projectId: "greatest-project-22b73",
+    storageBucket: "greatest-project-22b73.firebasestorage.app",
+    messagingSenderId: "737065353592",
+    appId: "1:737065353592:web:af3f07444d773e0879088d",
+    measurementId: "G-GWVRREHMCX"
+};
 
-        try {
-            let response = await fetch('/convert', {
-                method: 'POST',
-                body: formData
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const storage = firebase.storage();
+
+// Function to load files for users
+function loadFiles() {
+    const fileGrid = document.getElementById('uploadedFiles');
+    fileGrid.innerHTML = '';
+
+    storage.ref('uploads/').listAll()
+        .then((result) => {
+            result.items.forEach((itemRef) => {
+                itemRef.getMetadata().then(metadata => {
+                    itemRef.getDownloadURL().then(url => {
+                        const fileItem = document.createElement('div');
+                        fileItem.className = 'file-item';
+                        
+                        // Enhanced preview logic for different file types
+                        let previewHTML = '';
+                        const fileType = metadata.contentType || 'application/octet-stream';
+                        
+                        if (fileType.startsWith('image/')) {
+                            // Image preview
+                            previewHTML = `
+                                <div class="preview-container">
+                                    <img src="${url}" alt="${metadata.name}" style="max-width: 100%; max-height: 150px; object-fit: contain;">
+                                </div>`;
+                        } else if (fileType === 'application/pdf') {
+                            // PDF preview
+                            previewHTML = `
+                                <div class="preview-container">
+                                    <embed src="${url}" type="application/pdf" width="100%" height="150px">
+                                </div>`;
+                        } else if (fileType.startsWith('video/')) {
+                            // Video preview
+                            previewHTML = `
+                                <div class="preview-container">
+                                    <video controls style="max-width: 100%; max-height: 150px;">
+                                        <source src="${url}" type="${fileType}">
+                                        Your browser does not support video playback.
+                                    </video>
+                                </div>`;
+                        } else if (fileType.startsWith('audio/')) {
+                            // Audio preview
+                            previewHTML = `
+                                <div class="preview-container">
+                                    <audio controls style="width: 100%;">
+                                        <source src="${url}" type="${fileType}">
+                                        Your browser does not support audio playback.
+                                    </audio>
+                                </div>`;
+                        } else {
+                            // Generic file icon for other types
+                            const fileIcon = getFileIcon(metadata.name);
+                            previewHTML = `
+                                <div class="preview-container" style="text-align: center; padding: 20px;">
+                                    <i class="${fileIcon}" style="font-size: 48px; color: #e31837;"></i>
+                                    <p style="margin-top: 10px;">${getFileExtension(metadata.name).toUpperCase()} File</p>
+                                </div>`;
+                        }
+
+                        fileItem.innerHTML = `
+                            ${previewHTML}
+                            <div class="file-info">
+                                <h4 title="${metadata.name}">${truncateFileName(metadata.name, 25)}</h4>
+                                <p>Type: ${getFileTypeDescription(fileType)}</p>
+                                <p>Date: ${new Date(metadata.timeCreated).toLocaleDateString()}</p>
+                                <p>Size: ${formatFileSize(metadata.size)}</p>
+                            </div>
+                            <div class="file-actions">
+                                <button onclick="downloadFile('${url}', '${metadata.name}')" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </button>
+                                <button onclick="window.open('${url}', '_blank')" class="download-btn" style="margin-left: 10px;">
+                                    <i class="fas fa-external-link-alt"></i> Open
+                                </button>
+                            </div>
+                        `;
+                        fileGrid.appendChild(fileItem);
+                    });
+                });
             });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            let result = await response.json();
-            if (result.success) {
-                document.getElementById("audioSource").src = result.audio_url;
-                document.getElementById("audioPlayers").style.display = "block";
-                document.getElementById("audioPlayer").load();
-            } else {
-                alert("Error: " + result.error);
-            }
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-            alert('Failed to convert file. Please try again.');
-        }
-    });
-
-        
-        // Add mobile menu toggle
-        document.querySelector('.menu-icon').addEventListener('click', () => {
-            document.querySelector('.sidebar').style.transform = 'translateX(0)';
+        })
+        .catch((error) => {
+            console.error('Error loading files:', error);
         });
+}
 
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768 &&
-                !e.target.closest('.sidebar') &&
-                !e.target.closest('.menu-icon')) {
-                document.querySelector('.sidebar').style.transform = 'translateX(-100%)';
-            }
-        });
-        // this is for loader graphics
-        document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("preloader").style.display = "flex";  
-    });
-
-    window.onload = function() {
-        setTimeout(() => {
-            document.getElementById("preloader").classList.add("hide");
-            setTimeout(() => {
-                document.getElementById("preloader").style.display = "none"; 
-            }, 500); // Smooth fade-out delay
-        }, 1750); // Keep the loader visible for 1.5 seconds
+// Helper functions
+function getFileIcon(filename) {
+    const ext = getFileExtension(filename).toLowerCase();
+    const iconMap = {
+        'pdf': 'fas fa-file-pdf',
+        'doc': 'fas fa-file-word',
+        'docx': 'fas fa-file-word',
+        'xls': 'fas fa-file-excel',
+        'xlsx': 'fas fa-file-excel',
+        'ppt': 'fas fa-file-powerpoint',
+        'pptx': 'fas fa-file-powerpoint',
+        'txt': 'fas fa-file-alt',
+        'zip': 'fas fa-file-archive',
+        'rar': 'fas fa-file-archive',
+        'mp3': 'fas fa-file-audio',
+        'wav': 'fas fa-file-audio',
+        'mp4': 'fas fa-file-video',
+        'mov': 'fas fa-file-video',
+        'jpg': 'fas fa-file-image',
+        'jpeg': 'fas fa-file-image',
+        'png': 'fas fa-file-image',
+        'gif': 'fas fa-file-image'
     };
-    </script>
+    return iconMap[ext] || 'fas fa-file';
+}
+
+function getFileExtension(filename) {
+    return filename.split('.').pop() || '';
+}
+
+function truncateFileName(filename, maxLength) {
+    if (filename.length <= maxLength) return filename;
+    const ext = getFileExtension(filename);
+    const nameWithoutExt = filename.slice(0, -(ext.length + 1));
+    return `${nameWithoutExt.slice(0, maxLength-3)}...${ext}`;
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+function getFileTypeDescription(mimeType) {
+    const types = {
+        'application/pdf': 'PDF Document',
+        'application/msword': 'Word Document',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'Word Document',
+        'application/vnd.ms-excel': 'Excel Spreadsheet',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'Excel Spreadsheet',
+        'application/vnd.ms-powerpoint': 'PowerPoint Presentation',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'PowerPoint Presentation',
+        'text/plain': 'Text Document',
+        'application/zip': 'ZIP Archive',
+        'application/x-rar-compressed': 'RAR Archive',
+        'audio/mpeg': 'Audio File',
+        'audio/wav': 'Audio File',
+        'video/mp4': 'Video File',
+        'video/quicktime': 'Video File',
+        'image/jpeg': 'Image File',
+        'image/png': 'Image File',
+        'image/gif': 'Image File'
+    };
+    return types[mimeType] || 'File';
+}
+
+// Replace the existing downloadFile function with this simpler version
+function downloadFile(url, filename) {
+    try {
+        // Create a temporary link
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    } catch (error) {
+        console.error('Download failed:', error);
+        // Fallback to opening in new tab
+        window.open(url, '_blank');
+    }
+}
+
+// Add this before upload function
+firebase.auth().signInAnonymously()
+    .then(() => {
+        // User is signed in anonymously
+        console.log('Signed in anonymously');
+    })
+    .catch((error) => {
+        console.error('Auth error:', error);
+    });
+
+// Add this script for handling uploads
+document.getElementById('pdfUploadForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const file = document.getElementById('pdfInput').files[0];
+    if (!file) {
+        alert('Please select a PDF file');
+        return;
+    }
+
+    try {
+        // Create a reference to the file in Firebase Storage
+        const storageRef = storage.ref('uploads/' + file.name);
+        
+        // Show upload progress
+        const progressDiv = document.createElement('div');
+        progressDiv.innerHTML = `
+            <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                        background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 1000;">
+                <h3>Uploading ${file.name}</h3>
+                <progress value="0" max="100" style="width: 300px;"></progress>
+                <p style="text-align: center;"><span id="upload-progress">0</span>%</p>
+            </div>`;
+        document.body.appendChild(progressDiv);
+
+        // Upload the file
+        const uploadTask = storageRef.put(file);
+
+        // Monitor upload progress
+        uploadTask.on('state_changed', 
+            (snapshot) => {
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                progressDiv.querySelector('progress').value = progress;
+                progressDiv.querySelector('#upload-progress').textContent = Math.round(progress);
+            },
+            (error) => {
+                document.body.removeChild(progressDiv);
+                console.error('Upload failed:', error);
+                alert('Upload failed: ' + error.message);
+            },
+            () => {
+                document.body.removeChild(progressDiv);
+                alert('Upload completed!');
+                loadFiles(); // Refresh the file list
+            }
+        );
+    } catch (error) {
+        console.error('Upload error:', error);
+        alert('Upload error: ' + error.message);
+    }
+});
+</script>
 </body>
 </html>

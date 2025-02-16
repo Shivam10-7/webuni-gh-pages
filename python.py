@@ -7,8 +7,6 @@ from PIL import Image
 import pytesseract
 from werkzeug.utils import secure_filename
 from datetime import datetime
-import cloudinary
-import cloudinary.uploader
 
 # result = cloudinary.uploader.upload("path_to_your_file")
 # print(result)
@@ -19,15 +17,18 @@ import cloudinary.uploader
 #error while importing render_template form flask module (error mentions no module named flask found )
 app = Flask(__name__)
 
-cloudinary.config(
-    cloud_name="djr33abwe",
-    api_key="326571775883622",
-    api_secret="m8pWggycsPmoUUR6y9vYuWwAliY"
-)
+uploads = []
 
-uploads= []
-
-
+# Firebase configuration
+firebase_config = {
+    "apiKey": "AIzaSyBM5C2-QageRRyXI-oRpnHUd41C9DUWt3E",
+    "authDomain": "greatest-project-22b73.firebaseapp.com",
+    "projectId": "greatest-project-22b73",
+    "storageBucket": "greatest-project-22b73.firebasestorage.app",
+    "messagingSenderId": "737065353592",
+    "appId": "1:737065353592:web:af3f07444d773e0879088d",
+    "measurementId": "G-GWVRREHMCX"
+}
 
 UPLOAD_FOLDER = "uploads"
 AUDIO_FOLDER = "audio"
@@ -150,37 +151,9 @@ def elements():
 
 @app.route('/admin', methods=['POST','GET'])
 def admin():
-    if request.method == 'POST':
-        # Handle file upload
-        if 'file' not in request.files:
-            return jsonify({"error": "No file part"}), 400
-
-        file = request.files['file']
-        if file.filename == '':
-            return jsonify({"error": "No selected file"}), 400
-
-        # Upload file to Cloudinary
-        try:
-            upload_result = cloudinary.uploader.upload(file)
-            print("File uploaded successfully:", upload_result['url'])  # Debugging
-
-            # Save file metadata
-            file_metadata = {
-                'id': len(uploads) + 1,  # Auto-increment ID
-                'name': file.filename,
-                'type': 'file',  # You can customize this based on file type
-                'date': datetime.now().strftime('%Y-%m-%d'),  # Current date
-                'size': f"{(upload_result['bytes'] / 1024 / 1024):.2f}MB",  # Convert bytes to MB
-                'url': upload_result['url']  # Cloudinary URL
-            }
-            uploads.append(file_metadata)
-
-            return jsonify(file_metadata)  # Return metadata to the frontend
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    # Render the admin page for GET requests
-    return render_template('admin.html', files=uploads)
+    if request.method == 'GET':
+        return render_template('admin.html', files=[])
+    return jsonify({"error": "Method not allowed"}), 405
 
 
 
