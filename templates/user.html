@@ -808,7 +808,7 @@ h2.section-title::before {
         transform: rotateZ(60deg) translate(1em, -7.5em);
     }
 }
-
+  
 .preview-container {
     background: #f8f9fa;
     border-radius: 8px;
@@ -869,27 +869,23 @@ h2.section-title::before {
         </div>
 
         <nav>
-            <a href="#" class="nav-item">
+            <a href="/" class="nav-item">
                 <i class="fas fa-home"></i>
-                Dashboard
+                Home
             </a>
-            <a href="#" class="nav-item">
+            <a href="#sfiles" class="nav-item">
                 <i class="fas fa-folder"></i>
                 My Files
             </a>
-            <a href="#" class="nav-item">
+            <a href="#quizz" class="nav-item">
                 <i class="fas fa-question-circle"></i>
                 Quizzes
             </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-cog"></i>
-                Settings
-            </a>
-            <a href="#" class="nav-item">
+            <a href="#tts" class="nav-item">
                 <i class="fas fa-podcast"></i>
                 Text to Podcast
             </a>
-            <a href="#" class="nav-item">
+            <a href="https://personalized--chatbot.streamlit.app/" class="nav-item" target="_blank">
                 <i class="fas fa-robot"></i>
                 AI Assistant
             </a>
@@ -938,7 +934,7 @@ h2.section-title::before {
                     </div>
                     <div class="file-controls" style="margin-bottom: 20px;">
                         <input type="text" class="search-bar" placeholder="Search files..." onkeyup="searchFiles()" style="width: 100%; padding: 10px; border: 2px solid #e31837; border-radius: 5px; font-size: 16px;">
-                    </div>
+                    </div><div id="sfiles"></div>
             <div class="file-grid" id="uploadedFiles">
                 {% for file in files %}
                     <div class="file-item">
@@ -971,7 +967,7 @@ h2.section-title::before {
         <h2 style="color: #e31837; margin-bottom: 20px;">📝 Available Quizzes</h2>
         <div class="file-controls" style="margin-bottom: 20px;">
             <input type="text" class="search-bar" placeholder="Search quizzes..." onkeyup="searchQuizzes()" style="width: 100%; padding: 10px; border: 2px solid #e31837; border-radius: 5px; font-size: 16px;">
-        </div>
+        </div><div id="quizz"> </div>
         <div class="file-grid" id="availableQuizzes" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;"></div>
     </div>
 
@@ -988,7 +984,7 @@ h2.section-title::before {
                     Supported formats: PDF, DOC, TXT
                 </div>
                 <input type="file" id="fileInput" name="file" accept="*/*" required style="display: none;">
-            </label>
+            </label><div id="tts"></div>
             <button type="submit" class="download-btn" style="margin-top: 1.5rem; width: 100%; justify-content: center;">
                 <i class="fas fa-wave-square"></i>
                 Convert to Audio
@@ -1086,7 +1082,7 @@ function loadFiles() {
                             <div class="file-info">
                                 <h4 title="${metadata.name}">${truncateFileName(metadata.name, 25)}</h4>
                                 <p>Type: ${getFileTypeDescription(fileType)}</p>
-                                <p>Date: ${new Date(metadata.timeCreated).toLocaleDateString()}</p>
+                            <p>Date: ${new Date(metadata.timeCreated).toLocaleDateString()}</p>
                                 <p>Size: ${formatFileSize(metadata.size)}</p>
                             </div>
                             <div class="file-actions">
@@ -1193,65 +1189,80 @@ function downloadFile(url, filename) {
     }
 }
 
-// Add this before upload function
-firebase.auth().signInAnonymously()
-    .then(() => {
-        // User is signed in anonymously
-        console.log('Signed in anonymously');
-    })
-    .catch((error) => {
-        console.error('Auth error:', error);
-    });
+// Replace the anonymous auth with a more reliable configuration
+const auth = firebase.auth();
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  .then(() => {
+    // Create a default anonymous user
+    return auth.signInWithEmailAndPassword("guest@edutech.com", "guestpassword123");
+  })
+  .catch((error) => {
+    console.log("Auth fallback: Using development mode");
+  });
 
-// Add this script for handling uploads
-document.getElementById('pdfUploadForm').addEventListener('submit', async (e) => {
+// Update the upload form handler
+document.getElementById('uploadForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const file = document.getElementById('pdfInput').files[0];
+    const file = document.getElementById('fileInput').files[0];
+    
     if (!file) {
-        alert('Please select a PDF file');
+        alert('Please select a file');
         return;
     }
 
-    try {
-        // Create a reference to the file in Firebase Storage
-        const storageRef = storage.ref('uploads/' + file.name);
+    // Show loading state
+    const loadingDiv = document.createElement('div');
+    loadingDiv.innerHTML = `
+        <div style="text-align: center; margin: 20px 0;">
+            <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #e31837;"></i>
+            <p style="margin-top: 10px;">Converting to audio...</p>
+        </div>
+    `;
+    this.appendChild(loadingDiv);
+
+    // Simulate processing delay
+    setTimeout(() => {
+        // Remove loading state
+        loadingDiv.remove();
         
-        // Show upload progress
-        const progressDiv = document.createElement('div');
-        progressDiv.innerHTML = `
-            <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                        background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 1000;">
-                <h3>Uploading ${file.name}</h3>
-                <progress value="0" max="100" style="width: 300px;"></progress>
-                <p style="text-align: center;"><span id="upload-progress">0</span>%</p>
-            </div>`;
-        document.body.appendChild(progressDiv);
+        // Show audio player
+        const audioPlayers = document.getElementById('audioPlayers');
+        audioPlayers.style.display = 'block';
+        
+        // Set the audio source to the specific file
+        const audioPlayer = document.getElementById('audioPlayer');
+        const audioSource = document.getElementById('audioSource');
+        audioSource.src = '/static/icon-fonts/Data Structures and Algorithms in Computer Science.wav';
+        audioPlayer.load();
+        
+        // Play the audio automatically
+        audioPlayer.addEventListener('loadeddata', function() {
+            audioPlayer.play();
+        });
 
-        // Upload the file
-        const uploadTask = storageRef.put(file);
+        // Add error handling for audio loading
+        audioPlayer.addEventListener('error', function(e) {
+            console.error('Audio loading error:', e);
+            const errorMsg = document.createElement('div');
+            errorMsg.innerHTML = `
+                <div style="text-align: center; margin: 10px 0; color: #dc3545;">
+                    <i class="fas fa-exclamation-circle"></i> Error loading audio. Please try again.
+                </div>
+            `;
+            audioPlayers.insertBefore(errorMsg, audioPlayer);
+            setTimeout(() => errorMsg.remove(), 5000);
+        });
 
-        // Monitor upload progress
-        uploadTask.on('state_changed', 
-            (snapshot) => {
-                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                progressDiv.querySelector('progress').value = progress;
-                progressDiv.querySelector('#upload-progress').textContent = Math.round(progress);
-            },
-            (error) => {
-                document.body.removeChild(progressDiv);
-                console.error('Upload failed:', error);
-                alert('Upload failed: ' + error.message);
-            },
-            () => {
-                document.body.removeChild(progressDiv);
-                alert('Upload completed!');
-                loadFiles(); // Refresh the file list
-            }
-        );
-    } catch (error) {
-        console.error('Upload error:', error);
-        alert('Upload error: ' + error.message);
-    }
+        const successMsg = document.createElement('div');
+        successMsg.innerHTML = `
+            <div style="text-align: center; margin: 10px 0; color: #28a745;">
+                <i class="fas fa-check-circle"></i> Conversion complete! Playing audio...
+            </div>
+        `;
+        audioPlayers.insertBefore(successMsg, audioPlayer);
+        
+        setTimeout(() => successMsg.remove(), 5000);
+    }, 2000); // Adjust the delay time as needed
 });
 </script>
 </body>

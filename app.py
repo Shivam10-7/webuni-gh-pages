@@ -10,6 +10,7 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
 import shutil
+from flask import Flask, render_template, send_from_directory
 
 # Load environment variables
 load_dotenv()
@@ -123,6 +124,12 @@ def main():
         st.write("Tips:")
         st.write("- Upload multiple PDFs to combine their content.")
         st.write("- Ask specific questions for detailed answers.")
+
+app = Flask(__name__)
+
+@app.route('/static/audio/<path:filename>')
+def serve_audio(filename):
+    return send_from_directory('static/audio', filename)
 
 if __name__ == "__main__":
     main()
